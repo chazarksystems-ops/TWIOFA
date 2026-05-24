@@ -1,0 +1,12 @@
+12 — Open Decisions For Review (Resolved)
+All critical decisions for Chunk 0 are now resolved.
+Please refer to SPEC_V0_3_1_HARDENING_REPORT.md for the final locked decisions on:
+Repo Target
+Visualizer Stack
+Chunk Size
+Cell Storage
+Ant Group Representation
+Collapse Determinism
+Field Notes Scope (Perception Event Ledger)
+Tauri Policy
+Implementation may proceed only after Chaz formally approves the v0.3.1 build-readiness gate.

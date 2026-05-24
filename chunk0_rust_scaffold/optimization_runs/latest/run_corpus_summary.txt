@@ -1,0 +1,14 @@
+[PASS] RESET_ONLY | cmds=0 ticks=0 deltas=0 events=0 workers=100 conf=255 pos=(55,118) hash_after=459e899bca89
+[PASS] BASIC_DIG | cmds=1 ticks=1 deltas=1 events=1 workers=100 conf=255 pos=(45,100) hash_after=70f223a5a08e
+[PASS] BOUNDARY_DIG_BLOCKED | cmds=1 ticks=0 deltas=0 events=1 workers=100 conf=255 pos=(1,5) hash_after=e69df0097d56
+[PASS] MOVE_CARDINAL | cmds=2 ticks=4 deltas=0 events=0 workers=100 conf=255 pos=(9,5) hash_after=62773f6d75fc
+[PASS] SOURBACK_ENTRY | cmds=1 ticks=1 deltas=0 events=1 workers=7 conf=184 pos=(84,28) hash_after=fe5ac0f68f0e
+[PASS] SOURBACK_SLOWDOWN | cmds=1 ticks=1 deltas=0 events=1 workers=100 conf=255 pos=(85,30) hash_after=fadeeaf5286c
+[PASS] SOURBACK_REENTRY | cmds=1 ticks=6 deltas=0 events=2 workers=97 conf=239 pos=(10,15) hash_after=49caeaa85054
+[PASS] BLOCKED_MOVEMENT | cmds=1 ticks=3 deltas=0 events=1 workers=100 conf=255 pos=(10,10) hash_after=db8816254fc4
+[PASS] GREEDY_TIE | cmds=1 ticks=1 deltas=0 events=0 workers=100 conf=255 pos=(6,5) hash_after=2b9fff07bac3
+[PASS] LOW_WORKERS | cmds=1 ticks=1 deltas=0 events=1 workers=0 conf=184 pos=(84,28) hash_after=dcaeed203900
+[PASS] LOW_CONFIDENCE | cmds=1 ticks=1 deltas=0 events=1 workers=7 conf=0 pos=(84,28) hash_after=cc623852a968
+[PASS] RENDERFRAME_BOUNDARY | cmds=0 ticks=0 deltas=0 events=0 workers=100 conf=255 pos=(55,118) hash_after=459e899bca89
+
+Corpus result: ALL PASSED (12/12)

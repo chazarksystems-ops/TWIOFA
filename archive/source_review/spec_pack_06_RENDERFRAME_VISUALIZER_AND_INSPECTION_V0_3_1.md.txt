@@ -1,0 +1,38 @@
+06 — RenderFrame, Visualizer, and Inspection
+The Main Surface Rule
+The material grid/canvas is the main surface. Debug panels support the grid. Debug panels must never become the game.
+RenderFrame Contract
+Rust owns WorldTruth. The default visualizer receives a RenderFrame payload from Rust to draw the screen:
+tick_index
+chunk_hash
+visible_cells (or pixel/material render buffer)
+overlay_mode
+chunk_deltas
+perception_markers
+debug_stats
+It must exclude hidden semantic truth unless DevTruth mode is explicitly enabled.
+Inspection Modes
+ColonyView Mode (Default): Player-facing presentation. Hovering a cell shows ONLY events/markers associated with that coordinate via ColonyPerception (e.g., "Yellow bitter residue").
+DevTruth Mode (Explicit Toggle): Developer/debug inspection. May expose raw WorldTruth (e.g., Material::Air, Residue::SourbackBitter) for a selected cell or debug dump. DevTruth is a development tool, not a player-facing mode.
+Visualizer Default and Fallback
+Default visualizer: Rust simulation core + lightweight 2D pixel/grid visualizer using Tauri + HTML canvas. Permitted only if the central game surface is a canvas rendering the 128x128 material chunk, HTML/DOM is limited to controls/debug, simulation remains Rust-owned, and no card-dashboard gameplay is created.
+Fallback visualizer: minifb or pixels native visualizer, if Tauri becomes distracting.
+UI Anti-Card Compliance Test
+Explicitly fail any build where panels, logs, or cards become the main game surface instead of the material grid.
+Dependency Policy
+Allowed after approval:
+Rust
+serde
+deterministic RNG if needed
+Tauri + canvas as default visualizer
+minifb or pixels as fallback
+Banned:
+Unreal integration
+GPU-owned simulation
+custom GPU compute
+Bevy
+procedural generation
+A* pathfinding
+multiplayer
+card-dashboard gameplay
+(Note: pixels may use wgpu internally for rendering pixels to the screen, but the GPU must not own the simulation logic).

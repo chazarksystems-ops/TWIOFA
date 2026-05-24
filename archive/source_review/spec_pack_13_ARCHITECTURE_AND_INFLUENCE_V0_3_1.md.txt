@@ -1,0 +1,10 @@
+13 — Architecture & Influence Map
+Player / Dev Freedom Goals
+By enforcing a strict physical substrate (Vec<Cell>), we guarantee that the world is the interface. The player doesn't manage numbers on a spreadsheet; they manage physical space, structural integrity, and biological traces. This substrate gives developers freedom to add emergent features without rewriting abstract zone-logic, and it gives players organic consequence rather than card-game menus.
+Influence Comparison Tables
+What we take from Noita
+What we take from Diablo / BG3 / Hades
+Future Expansion Ladder (Post-Chunk 0)
+Chunk 1: Add dirty-region tracking (Active Chunks) and multi-chunk scaling.
+Chunk 2: Add Pheromone vector fields and full Field Notes archive UI.
+Chunk 3: Detach the basic Visualizer and bridge the data pipeline to Unreal Engine / WebGL for high-fidelity presentation.

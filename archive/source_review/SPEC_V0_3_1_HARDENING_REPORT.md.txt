@@ -1,0 +1,26 @@
+TWIOFA Chunk 0 Spec Pack — v0.3.1 Hardening Report
+Status
+V0.3.1 Locked Contract Candidate. Implementation may begin only after Chaz approves this v0.3.1 contract and the final build-readiness gate passes.
+Resolved Decisions (D1–D8)
+| ID | Topic | Locked Decision | Justification |
+| D1 | Repo Target | Fresh Substrate Repo | Isolates physical material test from legacy logic. |
+| D2 | Visualizer Stack | Tauri + HTML Canvas (Default) | Permitted only if the central game surface is a canvas rendering the 128x128 grid. HTML is limited to controls/debug. Fallback: minifb or pixels. |
+| D3 | Chunk Size | 128 x 128 | Small enough for instant tick processing; large enough to show nested relationships. |
+| D4 | Cell Storage | Flat Array/Vector | Small, copyable, no heap allocation per cell. |
+| D5 | Ant Group Model | Single Coordinate | Avoids swarm AI scope creep. Represents the macroscopic front of the colony effort. |
+| D6 | Collapse Model | Deterministic Threshold | No random rolling for gravity. Weak support + open space beneath = immediate swap. |
+| D7 | Perception Ledger | Perception Events Only | The backend emits event structs/receipts. Full Field Notes archive UI is explicitly deferred. |
+| D8 | Tauri Policy | Allowed conditionally | Banned from using HTML DOM for the game board or creating card-dashboard gameplay. |
+Build-Readiness Gate
+Before implementation, Chaz must approve:
+repo target;
+visualizer default and fallback;
+exact chunk size;
+cell schema;
+coordinate ranges;
+tick order;
+command list;
+test list;
+dependency policy;
+no-card-dashboard UI rule.
+Until this approval happens, no implementation code should be generated.

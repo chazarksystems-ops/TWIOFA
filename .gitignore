@@ -1,0 +1,12 @@
+target/
+**/target/
+*.zip
+*.7z
+*.rar
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+.claude/
+twiofa_claude_code_docs_patch/
+twiofa_playable_slice_completion_docs_patch_refined/

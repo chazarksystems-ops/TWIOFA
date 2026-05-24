@@ -1,0 +1,28 @@
+00 — Chunk 0 Purpose and Boundaries
+Purpose
+TWIOFA Chunk 0 is the first material-yard substrate spec. It exists to test whether TWIOFA can support a Noita-inspired physical world without becoming a Noita clone. The prototype should prove one small, inspectable, physically changing chunk where colony-scale ant decisions interact with soil, tunnels, moisture, scent, residue, carcass material, and collapse.
+Core Direction
+TWIOFA should move toward:
+Noita-like material freedom
+colony-scale ant strategy
+persistent yard memory
+physical evidence
+perception / misinterpretation
+later rich spatial UI/UX
+Chunk 0 Definition
+Chunk 0 is one bounded playable/simulatable material area (128x128 cells) containing a nest chamber, tunnel, surface band, carcass edge, moisture source, Sourback residue path, scent trail, dig rules, collapse rules, and an ant group.
+Locked Prototype Claims
+| ID | Claim | Must be directly observable? | Must be testable? |
+| C0-P1 | Soil and tunnel cells can physically change. | Yes | Yes |
+| C0-P2 | Ant-group digging can alter the map. | Yes | Yes |
+| C0-P3 | Moisture can change route safety or material behavior. | Yes | Yes |
+| C0-P4 | Scent can guide, decay, smear, or mislead. | Yes | Yes |
+| C0-P5 | Sourback residue can affect ant behavior and route confidence. | Yes | Yes |
+| C0-P6 | Carcass material can be harvested as a physical place. | Yes | Yes |
+| C0-P7 | Collapse can emerge from weakened/support-poor terrain. | Yes | Yes |
+| C0-P8 | Physical facts and colony interpretation can diverge. | Yes | Yes |
+| C0-P9 | The simulation can be deterministic enough for replay/debugging. | No, debug-visible | Yes |
+Success Definition (Definition of Done)
+Chunk 0 is complete when all validation tests (C0-TEST-*) pass with deterministic chunk hashes, and a reviewer can run a small command sequence and physically see digging, moisture spread, scent, and collapse on a 128x128 visual grid, with UI correctly separating perception from truth.
+Failure Definition (Definition of Not Done)
+Chunk 0 fails if the result is mostly cards, menus, logs, static zone boxes, uninspectable state, or scripted event output with no visible material change. Example failure: the food counter goes up, but Carcass cells on the grid do not physically disappear.

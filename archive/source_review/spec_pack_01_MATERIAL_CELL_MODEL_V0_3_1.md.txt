@@ -1,0 +1,35 @@
+01 — Exact Material and Cell Model
+Cell Schema
+Cell target: Small, copyable, no heap allocation. Cell must contain no heap-owned fields such as String, Vec, Box, HashMap, or Rc/Arc.
+Expected first-pass representation (7 one-byte fields):
+material: u8-compatible enum
+moisture: u8
+scent_home: u8
+scent_food: u8
+residue: u8-compatible enum
+support: u8
+flags: u8
+(Do not claim exact memory byte size unless the spec later requires a test to verify it).
+Material Semantics Table
+|
+| Material | Traversable? | Diggable? | Support Contrib | Moisture Diffuses? | Render Role |
+| Air | Yes | No | 0 | Fast | Background / empty space. |
+| Soil | No | Yes (Fast) | 200 | Slow | Main diggable substrate. |
+| LooseSoil | No | Yes (Fast) | 50 | Slow | Unstable risk layer. |
+| Tunnel | Yes | No | 0 | Fast | Dug space. Retains home scent well. |
+| Water | Yes (Slow) | No | 0 | Source | Flows down, spreads laterally. |
+| Carcass | No | Harvestable | 100 | No | Depletable food objective. |
+| Root | No | No | 255 | No | Structural anchor. |
+| Stone | No | No | 255 | No | Chunk boundary / unbreakable. |
+| NestWall | Yes | No | 255 | No | Starting zone anchor. |
+Material Interactions Table
+| Interaction | Outcome |
+| Water + Scent | Water/Moisture in a cell zeroes out or smears scent_home and scent_food. |
+| LooseSoil + Air Below | If support < 100, LooseSoil swaps with the Air or Tunnel cell below it. |
+| Digging + Support | Adjacent cells lose 50 support when a Soil cell becomes a Tunnel cell. |
+| Carcass + Harvest | Carcass cell becomes Air after N harvest actions, yielding 1 Food. |
+| Residue + Ant Group | Ant group inside SourbackBitter residue skips 50% of movement ticks or suffers fatigue. |
+| Moisture + Support | High moisture reduces support in LooseSoil by up to 25. |
+Budget Constraints
+Memory Budget: Highly cache-friendly. Storage models that rely on heavy heap allocations per cell will not scale and are forbidden.
+Performance Budget: One full tick across the 128x128 grid must execute rapidly enough on a single CPU thread to remain unnoticed during a command resolution.

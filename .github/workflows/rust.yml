@@ -1,0 +1,39 @@
+name: Rust validation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    name: Chunk 0 validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: chunk0_rust_scaffold
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install stable Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: cargo fmt --check
+        run: cargo fmt --check
+
+      - name: cargo check
+        run: cargo check
+
+      - name: cargo test
+        run: cargo test
+
+      - name: run-corpus (12/12 expected)
+        run: cargo run --bin chunk0_harness -- run-corpus
+
+      - name: stress-local-fixtures (100/100 expected)
+        run: cargo run --bin chunk0_harness -- stress-local-fixtures --seed 42 --cases 100
+
+      - name: smoke determinism
+        run: cargo run --bin chunk0_cli -- run-script smoke

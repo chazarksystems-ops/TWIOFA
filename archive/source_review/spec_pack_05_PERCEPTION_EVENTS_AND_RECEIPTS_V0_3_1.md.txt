@@ -1,0 +1,39 @@
+05 — Perception, Events, and Receipt Contract
+WorldTruth vs ColonyPerception Data Model
+WorldTruth includes:
+Chunk cell state (Vec<Cell>)
+Ant group state
+Tick index
+Deterministic seed / RNG state (if used)
+Hidden semantic meanings of residue/hazards
+Command history (if required for replay)
+ColonyPerception (The Perception Event Ledger) includes:
+Observed facts
+Suspected hazards
+Confidence states
+Interpretations
+Misread/Reframe language
+Player-facing UI must never receive hidden WorldTruth.
+Perception Event Ledger
+For Chunk 0, the full Field Notes archive UI is deferred. Instead, the backend emits Perception Events and debug receipts. The event ledger must remain compatible with later Field Notes expansion.
+Event Schema
+Events affect ColonyPerception. Example schema:
+PhysicalFact: Objective observation. (e.g., desc: "Yellow bitter residue encountered")
+ColonyInterpretation: Current subjective model.
+WorkerLoss: Physical consequence.
+Correction: Replaces an old interpretation (links to old note ID).
+Reframe: Keeps old interpretation as true but incomplete.
+Output / Receipt Contract
+After resolving a command, the simulation emits a Command Receipt.
+{
+  "packet_id": 1,
+  "chunk_hash": "a1b2c3d4",
+  "chunk_deltas": [ {"type": "CellMaterial", "x": 55, "y": 95, "mat": "Tunnel"} ],
+  "perception_updates": [
+    { "type": "PhysicalFact", "desc": "Sweet trace found", "coords": [[100, 25]] }
+  ],
+  "dev_event_summary": "The grassline answered with a bitter mark.",
+  "debug_stats": { "tick": 42 }
+}
+
+(Note: Use chunk_deltas and dev_event_summary, completely avoiding "board_deltas" and "result_card").

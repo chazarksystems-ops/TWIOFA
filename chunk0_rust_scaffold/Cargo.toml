@@ -1,0 +1,15 @@
+[package]
+name = "chunk0_rust_scaffold"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "chunk0_harness"
+path = "src/bin/chunk0_harness.rs"
+
+[[bin]]
+name = "chunk0_cli"
+path = "src/bin/chunk0_cli.rs"
+
+[dependencies]
+sha2 = "0.10"

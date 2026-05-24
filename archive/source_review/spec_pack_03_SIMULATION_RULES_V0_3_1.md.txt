@@ -1,0 +1,52 @@
+03 — Normative Simulation Rules
+Active-Region Policy
+For Chunk 0 v0.1 implementation, whole-chunk updates (iterating the entire array) are required. Dirty-cell tracking is deferred.
+Normative Tick Order
+This order is strictly required for deterministic consistency:
+Apply user command (change Ant Group state/intent).
+Execute Ant Group Movement & Task (Dig, Harvest, Scout).
+Execute Gravity & Collapse (Bottom-up loop).
+Execute Water Flow (Bottom-up loop).
+Execute Moisture Diffusion (Top-down or double-buffer).
+Execute Scent Decay.
+Execute Scent Reinforcement (from ant pathing).
+Generate Perception Events.
+Determinism & RNG Policy
+Strict Determinism: Use a fixed seed behavior with a deterministic RNG.
+Stable Event Ordering: Events must be emitted in a strictly reproducible sequence.
+Forbidden: No SystemTime wall-clock effects, no random memory-address seeds, no HashMap iteration (use BTreeMap if key-value iteration is needed).
+Hashing Rule
+Chunk hash: Hash a stable canonical serialization of simulation state. Hashing must be stable across repeated runs on the same implementation.
+Include: material, moisture, scent_home, scent_food, residue, support, flags, ant group state, tick index, deterministic command log position (if applicable).
+Exclude: visual-only highlights, UI hover state, debug panel state, wall-clock timestamps, frame counters.
+(If cross-platform determinism is required later, specify an explicit byte encoding then).
+Rule Pseudocode
+Digging:
+if ant.task == Dig && target_is_adjacent:
+    if cell.material == Soil or LooseSoil:
+        cell.material = Tunnel
+        cell.flags |= RECENTLY_DUG
+        reduce_support_of_neighbors()
+
+Collapse (Bottom-Up):
+for y from bottom to top:
+    if cell.material == LooseSoil and cell.support < THRESHOLD:
+        if cell_below is Air or Tunnel:
+            swap(cell, cell_below)
+            cell_below.flags |= RECENTLY_COLLAPSED
+
+Water Flow & Diffusion:
+water moves down if below is Air/Tunnel.
+moisture diffuses to adjacent soil slowly, lowering support.
+water zeroes out scent.
+
+Scent Decay:
+for all cells: 
+    scent_home = max(0, scent_home - DECAY_RATE)
+    scent_food = max(0, scent_food - DECAY_RATE)
+
+Carcass Harvest:
+if ant.task == Forage && adjacent to Carcass:
+    reduce Carcass mass
+    if mass == 0: Carcass cell -> Air
+    ant.food_carried += 1

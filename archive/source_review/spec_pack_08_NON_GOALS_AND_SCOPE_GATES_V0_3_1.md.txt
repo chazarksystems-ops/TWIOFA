@@ -1,0 +1,19 @@
+08 — Non-Goals and Scope Gates
+Hard Non-Goals
+Do not build:
+procedural world generation
+card-dashboard gameplay
+Unreal Engine integration
+GPU-owned compute logic
+multiplayer
+full packet campaign layer
+A* pathfinding
+full food economy
+doctrine system
+Deep Queen layer
+spider/centipede arcs
+complete biology simulation (keep Sourback as residue/pressure only)
+Scope Gate
+A proposed feature belongs in Chunk 0 only if it helps prove at least one of: material cell behavior, digging, collapse, moisture, scent, residue, carcass harvesting, ant-group interaction, perception split, or deterministic replay.
+Language Guardrails
+Player-facing text says "bitter/yellow residue" before "Sourback path" is earned. The UI must not leak hidden canon prematurely.

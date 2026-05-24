@@ -1,0 +1,10 @@
+04 — Ant Group State Machine & Commands
+Route Model Decision
+Chunk 0 routes are a minimal hybrid: Scent gradients in the material cells + simple ant memory. There is no explicit path object graph and no A pathfinding*. Ants move sequentially toward a coordinate if Air/Tunnel allows or follow contiguous scent gradients.
+Ant Group State Machine
+Tasks: Idle, Scout(x,y), Dig(x,y), Forage(x,y), ReturnHome.
+Transitions: E.g., Scout completes -> ReturnHome.
+Worker Loss Rules: Crossing SourbackBitter residue while in Forage task causes deterministic worker loss and confidence drop.
+Fatigue/Confidence: Handled as simple integers modified by tasks and residue.
+Command Contract
+Note: Avoid does not sever or destroy a route physically. It changes the assignment policy and lowers accidental worker exposure, but does not alter WorldTruth.

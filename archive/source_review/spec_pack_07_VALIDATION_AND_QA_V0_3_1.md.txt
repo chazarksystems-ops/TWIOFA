@@ -1,0 +1,18 @@
+07 — Validation Test Matrix and Smoke Paths
+Fixture List
+FIXTURE_INITIAL: The standard 128x128 map.
+FIXTURE_WEAK_ROOF: A tunnel directly beneath cells of LooseSoil with support = 40.
+FIXTURE_MOISTURE_SCENT: A scenario testing water overriding scent fields.
+FIXTURE_RESIDUE_ROUTE: A path forcing ants through Sourback residue.
+FIXTURE_CARCASS_HARVEST: Ant Group adjacent to Carcass.
+Validation Test Matrix
+Smoke Paths
+Manual Visual Smoke Path:
+Boot application.
+Verify 128x128 pixel grid/canvas is the primary visible element.
+Issue a command. Verify grid pixels change color/state.
+Verify the dev_event_summary panel updates after visible grid changes. The visible material grid change must be observable first.
+Automated Deterministic Smoke Path:
+Run headless test loading FIXTURE_INITIAL.
+Apply fixed command array: [Scout(95,25), Forage(95,25), Avoid(95,25)].
+Compare final chunk hash against a known golden hash.

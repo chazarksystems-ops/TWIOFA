@@ -1,0 +1,31 @@
+09 — Implementation Handoff After Approval
+Agent Stop Triggers
+Agents MUST STOP and ask for clarification before adding: full yard generation, card interfaces, Unreal Engine, GPU compute, A* pathfinding, procedural gen, multiplayer, or doctrine.
+Implementation Module Sketch
+When implementation is approved, modules should follow this outline:
+cell.rs / chunk.rs / materials.rs
+sim.rs (tick loops)
+orders.rs / ant.rs
+events.rs / perception.rs
+visualizer (Tauri/Canvas)
+tests.rs
+API Contract Sketch
+fn init_chunk(seed: u64) -> ChunkHash;
+fn apply_command(cmd: Command) -> CommandReceipt;
+fn step(ticks: u32) -> CommandReceipt;
+fn inspect_cell(x: usize, y: usize) -> CellInspectionData;
+fn chunk_hash() -> ChunkHash;
+fn dump_events() -> Vec<Event>;
+
+Micro-Yard Migration Note
+If importing code from an older TWIOFA testbench:
+Salvage: Event enums, Tauri IPC bridge structure.
+Discard: Any "zone-based" abstract logic. Chunk 0 replaces abstract zones with literal x,y cellular material arrays.
+Required Implementation Report Template
+The coding agent MUST generate CHUNK_0_IMPLEMENTATION_REPORT.md upon completion:
+## Chunk 0 Build Report
+- **Files Changed:** [List]
+- **Hash Determinism:** [Pass/Fail, Output Hash]
+- **Visualizer Check:** [Does it render a 128x128 material grid? Yes/No]
+- **Anti-Card Compliance:** [Confirm no card-dashboard surface]
+- **Tests Passed:** [List of C0-TEST IDs]
